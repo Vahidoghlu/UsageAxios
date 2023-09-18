@@ -6,16 +6,10 @@
       <div v-for="post in postList" class="card m-1">
         <img class="card-img-top" :src="post.thumbnail" :alt="post.title">
         <div class="card-body">
-          <h5 class="card-title"> {{ post.name }}</h5>
-          <p class="card-text"> {{ post.email }}</p>
-        </div>
-        <div class="d-flex justify-content-end">
-          <router-link
-              tag="a"
-              exact
-              :to="'/posts/' + post.id"
-              class="btn text-primary">Ətraflı
-          </router-link>
+          <h4 class="card-title"> {{ post.author }}</h4>
+          <h5 class="card-title"> {{ post.title }}</h5>
+          <p class="card-text"> {{ post.previewText }}</p>
+          <p class="card-text"> {{ post.content }}</p>
         </div>
       </div>
     </div>
@@ -25,22 +19,26 @@
 import axios from "axios";
 
 export default {
+  name: "posts",
   data(){
     return {
       postList : []
     }
   },
   created(){
-    axios.get("https://jsonplaceholder.typicode.com/users")
+    axios.get("https://vuejs-axios-lesson-default-rtdb.firebaseio.com/posts.json")
         .then(response => {
-          this.postList = response.data;
-
+          let data = response.data;
+          for(let key in data){
+            this.postList.push({ ...data[key], id : key })
+          }
         })
         .catch(e => console.log(e))
   }
 }
 </script>
-<style>
+
+<style scoped>
 .card {
   width: 300px;
 }

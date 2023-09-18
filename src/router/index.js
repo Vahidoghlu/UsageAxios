@@ -1,29 +1,34 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Posts from "@/components/Posts.vue";
-import NewPost from "@/components/NewPost.vue";
-import details from "@/components/details.vue";
-import posts from "@/components/Posts.vue";
+import Users from "@/views/user/Users.vue";
+import NewUser from "@/views/user/NewUser.vue";
+import Details from "@/views/user/Details.vue";
+import posts from "@/views/post/posts.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path : "/posts",
-      name: 'posts',
-      component : Posts
+      path : "/users",
+      name: 'users',
+      component : Users
     },
     {
-      path : "/new-post",
-      name: 'newPost',
-      component : NewPost
+      path : "/new-user",
+      name: 'newUser',
+      component : NewUser
     },
     {
-      path : "/posts/:id",
+      path : "/users/:id",
       name: 'details',
-      component : details
+      component : Details
     },
     { path: '/:catchAll(.*)',
-      component: posts,}
+      component: Users
+    },
+    { path: '/posts',
+      name: 'posts',
+      component: posts
+    }
   ]
 })
 

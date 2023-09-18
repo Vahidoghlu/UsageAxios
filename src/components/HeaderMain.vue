@@ -1,5 +1,3 @@
-
-
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
     <a class="navbar-brand" href="#">Axios Lesson 1</a>
@@ -14,7 +12,7 @@
             class="nav-item"
             active-class="active"
             exact
-            to="/posts">
+            to="/users">
           <a class="nav-link" href="#">Siyahı</a>
         </router-link>
         <router-link
@@ -22,8 +20,16 @@
             class="nav-item"
             active-class="active"
             exact
-            to="/new-post">
+            to="/new-user">
           <a class="nav-link" href="#">Əlavə et</a>
+        </router-link>
+        <router-link
+            tag="li"
+            class="nav-item"
+            active-class="active"
+            exact
+            to="/posts">
+          <a class="nav-link" href="#">Postlar</a>
         </router-link>
       </ul>
     </div>
