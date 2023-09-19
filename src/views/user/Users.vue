@@ -23,7 +23,6 @@
   <div v-else class="loading-indicator">Loading...</div>
 </template>
 <script>
-import axios from "axios";
 import {mapFields} from "vuex-map-fields";
 
 export default {
