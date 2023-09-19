@@ -1,8 +1,8 @@
 import { createStore } from 'vuex';
-import {getField, updateField} from 'vuex-map-fields'
+import { getField, updateField } from 'vuex-map-fields';
 import userList from "@/stores/modules/user";
 
-const index = createStore({
+export default createStore({
     state: {
         isError: false
     },
@@ -10,11 +10,9 @@ const index = createStore({
         getField
     },
     mutations: {
-        updateField,
+        updateField
     },
     modules: {
         userList
     }
 });
-
-export default index;

@@ -1,4 +1,4 @@
-import {getField, updateField} from "vuex-map-fields";
+import { getField, updateField } from "vuex-map-fields";
 import axios from "axios";
 
 const state = {
@@ -7,40 +7,33 @@ const state = {
 };
 
 const getters = {
-    getField
+    getField,
 };
 
 const mutations = {
     updateField,
-    setUsers(state, payload) {
-        state.users = payload;
+    setUsers: (state, users) => {
+        state.users = users;
     },
-    setUserDetail(state, payload){
-        state.userDetail= payload
-    }
+    setUserDetail: (state, userDetail) => {
+        state.userDetail = userDetail;
+    },
 };
 
 const actions = {
-    getUsers({commit}) {
-       return axios.get("https://jsonplaceholder.typicode.com/users/")
-            // .then(response => {
-            //     commit('setUsers', response.data);
-            // })
+    async getUsers({ commit }) {
+        const response = await axios.get("https://jsonplaceholder.typicode.com/users/");
+        commit('setUsers', response.data);
     },
-    getUserDetails({commit}, payload){
-        return new Promise((resolve, reject) => {
-            axios.get(`https://jsonplaceholder.typicode.com/users/${payload}`)
-                .then(response => {
-                    let responseData = response.data
-                    commit('setUserDetail', responseData)
-                    resolve()
-                })
-                .catch((err) => {
-                    reject()
-                   return  e => console.log(e)
-                })
-        })
-    }
+    async getUserDetails({ commit }, payload) {
+        try {
+            const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${payload}`);
+            commit('setUserDetail', response.data);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    },
 };
 
 export default {
@@ -48,5 +41,5 @@ export default {
     state,
     getters,
     mutations,
-    actions
-}
+    actions,
+};

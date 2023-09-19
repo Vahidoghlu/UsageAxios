@@ -29,11 +29,22 @@ export default {
     axios.get("https://vuejs-axios-lesson-default-rtdb.firebaseio.com/posts.json")
         .then(response => {
           let data = response.data;
+          console.log(response.data)
           for(let key in data){
             this.postList.push({ ...data[key], id : key })
           }
         })
-        .catch(e => console.log(e))
   }
+
+  //ALternativ
+  // async created() {
+  //   try {
+  //     const response = await axios.get("https://vuejs-axios-lesson-default-rtdb.firebaseio.com/posts.json");
+  //     this.postList = Object.entries(response.data).map(([id, post]) => ({ ...post, id }));
+  //   } catch (error) {
+  //     console.error("Error fetching posts:", error);
+  //   }
+  // },
+
 }
 </script>

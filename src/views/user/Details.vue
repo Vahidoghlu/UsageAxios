@@ -49,7 +49,7 @@ import {mapActions} from "vuex";
 export default {
   data(){
     return{
-      isLoading: false
+      isLoading: true
     }
   },
   computed : {
@@ -58,12 +58,15 @@ export default {
   methods: {
     ...mapActions('userList', ['getUserDetails'])
   },
-  created(){
+  async created() {
     const userId = this.$route.params.id;
-    this.isLoading=true
-    this.getUserDetails(userId).finally(()=>{
-      this.isLoading=false
-    })
+    try {
+      await this.getUserDetails(userId);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    } finally {
+      this.isLoading = false;
+    }
   },
 }
 </script>
